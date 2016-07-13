@@ -1,6 +1,6 @@
 /**
 * Loading plugin for jQuery
-* version: v1.0.6
+* version: v1.0.7
 *
 * Small helper to give the user a visual feedback that something is happening
 * when fetching/posting data
@@ -94,7 +94,7 @@
             self._loader = $( tpl );
 
             // Disable the element
-            if( $( self.element ).is( "input, textarea" ) && true === self.options.disableSource ) {
+            if( $( self.element ).is( "input, textarea, select" ) && true === self.options.disableSource ) {
 
                 $( self.element ).attr( "disabled", "disabled" );
 
@@ -108,8 +108,11 @@
             // Set position
             switch( self.options.position ) {
 
-                case "inside":
+                case "inside": 
                     $( self.element ).html( self._loader );
+                    break;
+
+                case "none": /*EDIT:: 26/02/16 Added additional position option for 'none'*/
                     break;
 
                 case "overlay":
@@ -176,7 +179,7 @@
         disableOthers: function() {
             $.each(this.options.disableOthers, function( i, e ) {
                 var elt = $( e );
-                if( elt.is( "button, input, textarea" ) ) {
+                if( elt.is( "button, input, textarea, select" ) ) {
                     elt.attr( "disabled", "disabled" );
                 }
                 else {
@@ -188,7 +191,7 @@
         enableOthers: function() {
             $.each(this.options.disableOthers, function( i, e ) {
                 var elt = $( e );
-                if( elt.is( "button, input, textarea" ) ) {
+                if( elt.is( "button, input, textarea,select" ) ) {
                     elt.removeAttr( "disabled" );
                 }
                 else {
